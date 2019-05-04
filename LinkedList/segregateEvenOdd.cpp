@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 using namespace std;
@@ -16,6 +15,7 @@ class LinkedList{
     LinkedList();
     ~LinkedList();
     void pushNode(int data);
+    void SwapNodes(int x,int y);
     void devideEvenOdd();
     void printList();
 };
@@ -81,7 +81,41 @@ LinkedList::~LinkedList(){
     std::cout << "LIST DELETED";
 }
 
+void swap(Node*& a,Node*& b){
+    //Node* a_next = a->next;
+    //Node* b_next = b->next;
+    Node* temp = a;
+    a = b;
+    b = temp;
+    
+    // Node* a_next = (a->next);
+    // a->next = b->next;
+    // b->next = a_next;
+}
 
+void LinkedList::SwapNodes(int x,int y){
+    if(x==y){
+        return;
+    }
+    Node** a = NULL;
+    Node** b = NULL;
+    Node** cure = &(this->head);
+    while(*cure)
+    {
+        if((*cure)->data == x){
+            a = cure;
+        }
+        if((*cure)->data == y){
+            b = cure;
+        }
+        cure = &((*cure)->next);
+    }
+    if(a && b){
+        //swap((a->next),(b->next));
+        swap(*a,*b);
+        swap(((*a)->next), ((*b)->next)); 
+    }
+}
 
 int main()
 {
@@ -96,7 +130,9 @@ int main()
     
     l->printList();
     cout<<endl;
-    l->devideEvenOdd();
+    // l->devideEvenOdd();
+    // l->printList();
+    l->SwapNodes(10,6);
     l->printList();
 
     return 0;
