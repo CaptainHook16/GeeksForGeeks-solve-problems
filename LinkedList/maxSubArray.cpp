@@ -16,3 +16,19 @@ int Solution::maxSubArray(const vector<int> &A) {
     }
     return max;
 }
+
+//METHOD 2 - Kadane’s algorithm
+int Solution::maxSubArray(const vector<int> &A) {
+    int max = INT_MIN;
+    int count = 0;
+    for(int i=0;i<A.size();++i){
+        count += A[i];
+        if(count > max){
+            max = count;
+        }
+        if(count<0){
+            count = 0;
+        }
+    }
+    return max;
+}
